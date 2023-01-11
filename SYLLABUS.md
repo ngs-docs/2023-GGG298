@@ -1,6 +1,13 @@
+---
+tags: ggg, ggg2023, ggg298
+---
+
+# Syllabus for Tools for Data Intensive Research, GGG 298, WQ 2022-2023
+
+[![hackmd-github-sync-badge](https://hackmd.io/Y3aIAoJsR_y-F-e2_UqZHw/badge)](https://hackmd.io/Y3aIAoJsR_y-F-e2_UqZHw)
+
 [toc]
 
-# Tools for Data Intensive Research, GGG 298,  WQ 2022-2023
 
 Winter Quarter, 2022-2023
 GGG 298 section 88
@@ -12,7 +19,7 @@ WHERE/WHEN:
 * Lab: Wed **12:30-3pm**, Shields 360 (DataLab)
 * Discussion: Thursday 1:10-2pm, Bainer 1128
 
-This lab section of this class will be hybrid friendly; please contact Dr. Brown if you need the zoom link for any reason.
+The lab section of this class will be hybrid friendly; please contact Dr. Brown if you need the zoom link for any reason.
 
 (Note that class starts at 12:30pm on Wednesday, not at 12:10; the registrar does not appear to allow nontraditional start times ;).
 
