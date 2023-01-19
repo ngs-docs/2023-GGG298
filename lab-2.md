@@ -70,7 +70,7 @@ This says you're logged into the farm head node (central computer) as account `d
 
 Now copy/paste the following command (both lines):
 ```
-srun -p high2 --time=0:30:00 --nodes=1 \
+srun -p high2 --time=3:00:00 --nodes=1 \
     --cpus-per-task 1 --mem 5GB --pty /bin/bash
 ```
 you should see output like this:
@@ -84,7 +84,7 @@ srun: job 60489223 has been allocated resources
 :::spoiler
 Here, the `c4-86` is the name of one of the many compute nodes on farm.
 
-The command above asks the farm cluster queuing system to find "room" for you on the cluster to run something for 30 minutes on one CPU, using 5 GB of RAM.
+The command above asks the farm cluster queuing system to find "room" for you on the cluster to run something for 3 hours on one CPU, using 5 GB of RAM.
 :::
 
 #### Load and run RStudio Server:
@@ -176,6 +176,18 @@ If you are using `ssh` from a Terminal on Mac OS X, you'll have to copy it using
 scp datalab-xx@farm.cse.ucdavis.edu:298-compare/compare.mat.matrix.png ./
 ```
 See [this link](https://ngs-docs.github.io/2021-august-remote-computing/connecting-to-remote-computers-with-ssh.html#copying-files-to-and-from-your-local-computer.) for a little more information.
+
+## 3b. Logging out
+
+It is polite to close sessions onto farm and/or log out, but not strictly necessary. It is polite because it will help farm deallocate the resources.
+
+You can close sessions by closing the Terminal or MobaXTerm window that you used to connect in.
+
+The more formally correct thing to do is this, in the window where you ran the `srun` and `rserver-form`:
+* hit CTRL-C to "cancel" `rserver-farm` and stop the RStudio job.
+* type `exit` to exit the srun session
+
+and then you're actually done. But closing the window will essentially accomplish the same, I think.
 
 ## 4. General background for working in the UNIX shell
 
