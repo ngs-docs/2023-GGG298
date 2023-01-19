@@ -4,6 +4,9 @@ tags: ggg, ggg2023, ggg298
 
 # Week 2 lab notes - GGG 298 - Jan 18, 2023
 
+[![hackmd-github-sync-badge](https://hackmd.io/n7_pXRiiRQ-YpQBQ93uW9Q/badge)](https://hackmd.io/n7_pXRiiRQ-YpQBQ93uW9Q)
+
+
 [toc]
 
 ## Today!
