@@ -8,10 +8,6 @@ tags: ggg, ggg2023, ggg298
 
 [Permanent link](https://github.com/ngs-docs/2023-GGG298/blob/main/lab-3.md)
 
-TODO:
-* post to canvas
-* resolve @@
-
 [toc]
 
 ## Today!
@@ -161,6 +157,10 @@ For example,
 ls -F
 ```
 will give indicators as to whether something is a file, a directory, or whatever.
+
+::::info
+Let's check out [explainshell.com](https://explainshell.com/) together!!
+::::
 
 We can also combine commands:
 
@@ -502,7 +502,9 @@ If you run `module load rstudio-server/2022.07.1` and see: `RStudio Server is no
 
 See [rendered notebook](https://sourmash.readthedocs.io/en/latest/kmers-and-minhash.html).
 
-sourmash details to discuss -
+Reminder, here is our [sourmash workflow](https://github.com/ngs-docs/2023-ggg298-sourmash-compare/blob/main/Snakefile).
+
+sourmash details to discuss from workflow -
 * `sourmash sketch dna` - extracts k-mers
 * `sourmash compare` - loads all k-mers, compares
 * `sourmash plot` - plots relationship
