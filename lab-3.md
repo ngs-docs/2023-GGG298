@@ -4,16 +4,19 @@ tags: ggg, ggg2023, ggg298
 
 # Week 3 lab notes - GGG 298 - Jan 25, 2023
 
+[![hackmd-github-sync-badge](https://hackmd.io/4Tm5i97QT5iDlZL-IC7U8A/badge)](https://hackmd.io/4Tm5i97QT5iDlZL-IC7U8A)
+
+[Permanent link](https://github.com/ngs-docs/2023-GGG298/blob/main/lab-3.md)
+
 TODO:
-* save to github
-* add badge
 * post to canvas
+* resolve @@
 
 [toc]
 
 ## Today!
 
-Today will be scattered across multiple topics. I'll post a topics schedule for the rest of the quarter shortly, but most of the remaining lab sessions will focus on specific topics, with a few hands-on practice sessions in the middle.
+Today will be scattered across multiple topics, but hopefully this will be the last super-scattered lesson. I'll post a topics schedule for the rest of the quarter shortly, but most of the remaining lab sessions will focus on specific topics, with a few hands-on practice sessions in the middle.
 
 Rough outline:
 
@@ -21,7 +24,7 @@ Rough outline:
 * working on multiuser systems - a brief intro
 * UNIX commands more generally - cd, ls, rm, files and folders, and commands
 * running the sourmash workflow on farm - what are all the steps?
-* what is sourmash doing "underneath" - a brief introduction to k-mer comparisons and Jaccard similarity (if we have time)
+* what is sourmash doing "underneath" - a brief introduction to k-mer comparisons and Jaccard similarity *(if we have time)*
 
 ## Logging into farm
 
@@ -53,7 +56,7 @@ Question: why do you need two ssh connections to farm?? Why can't we do all of t
 
 ## UNIX commands: a brief introduction
 
-Adapted from: [link](https://ngs-docs.github.io/2021-august-remote-computing/introduction-to-the-unix-command-line.html)
+Adapted from: [Introduction to the UNIX Command Line](https://ngs-docs.github.io/2021-august-remote-computing/introduction-to-the-unix-command-line.html)
 
 ### Learning Goals
 * visualize file/directory structures
@@ -305,7 +308,9 @@ Google (and especially stackoverflow) is your friend! Use Internet
 search whenever you have questions about what a command does, or what
 commands to use to achieve a particular tasks.
 
-## Working on multiuser systems
+## Working on multiuser systems like farm
+
+(Adapted from [Running programs on remote computers and retrieving the results](https://ngs-docs.github.io/2021-august-remote-computing/running-programs-on-remote-computers-and-retrieving-the-results.html).)
 
 ### Using multiple terminals
 
@@ -462,6 +467,36 @@ conda activate lab2
 # run snakemake
 snakemake -j 1
 ```
+
+### Diagnosing common problems
+
+#### I can't find my files!
+
+You're probably in the wrong working directory if:
+
+* `ls` doesn't show you the files you expect to see
+* `pwd` doesn't give the right directory
+
+solution: type `cd ~/`, `ls`, and then look for right directory; then `cd` into it.
+
+#### You're trying to run a command, and it's saying 'command not found!'
+
+If you try to run snakemake and it says "command not found", you're probably not in the right conda environment.
+
+The conda environment is listed in the first part of your prompt; see:
+```
+(base) datalab-02@farm:~$ 
+ ^^^^
+```
+
+the 'base' here means you're in the conda environment named 'base'. You probably want to be in the conda environment called 'lab2':
+```
+conda activate lab2
+```
+
+#### It tells you you can't run RStudio Server!
+
+If you run `module load rstudio-server/2022.07.1` and see: `RStudio Server is not allowed on the head node.` then you forgot to do the srun to allocate yourself a compute node!
 
 ## What is sourmash actually doing underneath?
 
