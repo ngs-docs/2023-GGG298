@@ -7,7 +7,7 @@ tags: ggg, ggg2023, ggg298
 [![hackmd-github-sync-badge](https://hackmd.io/VTcCz9dmSf6vclaHRwavlw/badge)](https://hackmd.io/VTcCz9dmSf6vclaHRwavlw)
 
 
-[(Permanent link on github)](https://github.com/ngs-docs/2023-GGG298/blob/main/lab-3-conda/index.md)
+[(Permanent link on github)](https://github.com/ngs-docs/2023-GGG298/blob/main/lab-4-conda/index.md)
 
 
 ---
