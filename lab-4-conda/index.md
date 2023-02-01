@@ -2,7 +2,7 @@
 tags: ggg, ggg2023, ggg298
 ---
 
-# Installing software on remote computers with conda - Week 4, GGG 298 Winter 2023
+# Installing software on remote computers with conda/mamba - Week 4, GGG 298 Winter 2023
 
 [![hackmd-github-sync-badge](https://hackmd.io/VTcCz9dmSf6vclaHRwavlw/badge)](https://hackmd.io/VTcCz9dmSf6vclaHRwavlw)
 
@@ -46,16 +46,16 @@ It's a confusing ecosystem of operating systems (Mac OS X, many versions of Linu
 
 Many software has many dependencies (e.g. just consider base language -- C++, Java, Python, R, and their different versions)
 
-![Caption: Software has a lot of dependencies](conda-isolation.png)
+![Caption: Software has a lot of dependencies](https://github.com/ngs-docs/2023-GGG298/blob/main/lab-4-conda/conda-isolation.png?raw=true)
 
 
-This leads to confusing situations where different versions of underlying software are need to run two different programs -- what if you wanted to run Macs14 and sourmash both, but one wanted 'python' to mean python2 and the other wanted 'python' to mean python3?
+This leads to confusing situations where different versions of underlying software are need to run two different programs -- what if you wanted to run Macs14 and sourmash both, but one wanted 'python' to mean python2 and the other wanted 'python' to mean python3? Or you needed to use two R packages - one that only worked with R 4.0.1, and one that worked only with R 4.1.1? 
 
-![Caption: sometimes different software packages can't coexist](conda-versions.png)
+![Caption: sometimes different software packages can't coexist](https://github.com/ngs-docs/2023-GGG298/blob/main/lab-4-conda/conda-versions.png?raw=true)
 
 Decoupling user-focused software from underlying operating systems is a Big Deal - imagine, otherwise you'd have to rebuild software for every OS! (This is kind of what conda does for you, actually - it's just centralized!)
 
-Also, lot of software installation currently requires (or at least is much easier with) sysadmin privileges, which is inherently dangerous.
+Also, lot of software installation currently requires (or at least is much easier with) sysadmin privileges, which is inherently dangerous on mulituser systems.
 
 **Why do you need isolated software install environments? Some specific reasons:**
 
@@ -65,52 +65,54 @@ Also, lot of software installation currently requires (or at least is much easie
 * publication ("here's what I used for software", repeatability!)
 * sometimes workflows rely on incompatible software packages! see [my twitter question](https://twitter.com/ctitusbrown/status/1218252506335080449)
 
-Conda tries to solve all of these problems, and (in my experience) largely succeeds. That's what we'll explore today.
+Conda tries to solve all of these problems, and (in our experience) largely succeeds. That's what we'll explore today.
 
-Conda is a solution that seems to work pretty well, and can be used by any user. Downsides are that it can get big to have everyone install their own software system, but it's not that big... (The farm admins like it, too!)
+:::info
+Conda is a solution that seems to work pretty well, and can be used by any user. Downsides are that it can get big to have everyone install their own software system, but it's not that big... (The farm HPC admins like it, too!)
+:::
 
-![Caption: conda environments and packages](conda-cartoon.png)
+![Caption: conda environments and packages](https://github.com/ngs-docs/2023-GGG298/blob/main/lab-4-conda/conda-cartoon.png?raw=true)
 
-Note that conda emerged from the Python world but is now much broader and works for many more software packages, including R!
+Note that conda emerged from the Python world but is much broader and works for many more software types, including R!
 
-## Getting started with conda
+## Getting started with conda and mamba
 
-### Installing conda
+### Installing conda and mamba
 
-We installed conda in your account already for you. In case you want to
-install it on another computer, or in another account, [the miniconda
-installation instructions are pretty good!](https://conda.io/projects/conda/en/latest/user-guide/install/index.html#regular-installation)
+We installed conda/mamba in your account already for you. 
 
-Note that we also added the following software sources to your installation,
-```
-conda config --add channels defaults
-conda config --add channels bioconda
-conda config --add channels conda-forge
-```
-and we'll talk about this later. But if you install miniconda on your own,
-you'll need to run these commands in your new installation to set up the
-software sources correctly.
+:::warning
+In case you want to
+install it on another computer, or in another account, [follow these instructions](https://github.com/conda-forge/miniforge#install) to install mambaforge.
+:::
 
+:::info
 ### conda vs mamba
+
+mamba is a reimplementation of conda that is faster.
 
 You can use either `conda` or `mamba` to manage environments. They are, with almost no expections, identical in _behavior_.
 
 Below, we'll be using the `mamba` command because it's always faster than conda.
-
-The only exception is that you must run `conda activate` to activate environments.
+:::
 
 ### Log into farm
 
-As per the instructions you received in e-mail,
-log into farm.cse.ucdavis.edu using your datalab-XX account.
+Log into farm.cse.ucdavis.edu using your datalab-XX account; see [instructions](https://hackmd.io/4Tm5i97QT5iDlZL-IC7U8A/view#Logging-into-farm).
 
-When you log in, your prompt should look like this:
+We suggest [using RStudio](https://hackmd.io/4Tm5i97QT5iDlZL-IC7U8A/view#Logging-into-farm) but you don't have to - you can run everything below at a regular ssh login prompt.
+
+:::info
+If using RStudio, remember to use the Terminal tab!
+:::
+
+When you log in, your prompt should look something like this:
 
 > ~~~
 > (base) datalab-09@farm:~$
 > ~~~
 
-If it doesn't, please alert a TA and we will help you out!
+If it doesn't, please let us know and we will help you out!
 
 The 'base' part of the prompt indicates that conda has
 been activated in your account and that you are in the default (base)
@@ -146,7 +148,7 @@ should just go ahead and create the environment.
 Now, activate the new environment:
 
 ```
-conda activate csv
+mamba activate csv
 ```
 
 Your prompt should change to have `(csv)` at the beginning.
@@ -178,13 +180,13 @@ and you should see:
 
 ### csvtk in a bit more detail
 
-Let's explore csvtk a bit - what's going on here?
+What's going on here?
 
 csvtk is [a cross-platform library for working with CSV and TSV
 files](https://bioinf.shenwei.me/csvtk/). It's written and maintained
 by Wei Shen, and it's free and open source.
 
-It's relatively new - I found out about it only a year or two ago - and
+It's relatively new - I found out about it a few years ago - and
 while it doesn't do anything I couldn't do with other commands, it packages
 a bunch of really nice functionality together into one tool.
 
@@ -199,7 +201,7 @@ csvtk cut -f Character All-seasons.csv | sort | uniq -c | sort -n | tail
 ```
 (which tells me that Cartman is by far the most quoted character in this file).
 
-What I'm doing here is using piping and filtering (from our previous lab) to:
+What I'm doing here is using UNIX piping and filtering (see [more information here](https://ngs-docs.github.io/2021-august-remote-computing/creating-and-modifying-text-files-on-remote-computers.html#redirection-appending-and-piping.)) to:
 
 * take the contents of the Character column, produced by csvtk
 * sorting the contents (`sort`)
@@ -230,16 +232,19 @@ it's mostly useful for data scientists, so it's not "built into" UNIX
 operating systems yet (and may never be).
 
 So when you try running it in the _base_ environment,
-```
-conda activate base
+```shell
+mamba activate base
 csvtk
 ```
 you'll get "command not found" because it's not installed.
 
-But conda lets us install it from bioconda, a community repository of
-software! And then we can use it! Yay!
+Let's revisit that:
 
-If you go back to your csv environment, you'll see that you can run it
+* csvtk is not something that's installed by default on farm.
+* it's not in our default conda environment, either.
+* but, if we use mamba to install it in a new environment, and then activate that environment, we can use it!
+
+If you switch back to your csv environment, you'll see that you can run it
 again:
 
 ```
@@ -284,8 +289,17 @@ mamba install -y fastqc
 and that should work too! You'll be able to run the `fastqc` command now.
 
 Here, FastQC is a completely separate application that we use in
-bioinformatics for looking at FASTQ files. We talk about that more elsewhere but: the main point is that it's just
+bioinformatics for looking at FASTQ files. The main point is that it's just
 some more "non-standard" software that you can install!
+
+:::success
+Let's try it out quickly -
+```
+cd ~/
+fastqc ~ctbrown/data/ggg201b/SRR2584403_1.fastq.gz -o ./
+```
+This will create two files, `SRR2584403_1_fastqc.html` and `SRR2584403_1_fastqc.zip`, in your home directory. You can look at them in the RStudio browser window OR you can look at an example copy [here](https://farm.cse.ucdavis.edu/~ctbrown/SRR2584403_1_fastqc.html).
+:::
 
 Generally you want to avoid installing too many packages in one
 environment, as it starts to get slow to figure out whether or not
@@ -297,9 +311,7 @@ mamba list
 ```
 
 which is less useful than you might think, given how many packages
-we've installed... in the future you will be able to list only the
-user-requested packages and *not* the dependencies needed for them,
-but for now, there's no good way to do that.
+we've actually installed... this is because packages like FastQC have many dependencies!
 
 (Why are there so many? Because most software is built on top of
 _lots_ of other software... and so you need to install all of that other
@@ -313,11 +325,14 @@ mamba list csvtk
 ```
 and look at the second column. (Note that `mamba list` doesn't need an exact match, so e.g. you can find all packages with 'csv' in the name by doing `mamba list csv`).
 
-As of Aug 2021, conda installs csvtk version 0.23.0. You can force conda to install _exactly_ this version in the future like so,
+As of Aug 2021, conda installs csvtk version 0.25.0. You can force conda to install _exactly_ this version in the future like so,
 ```
-mamba install csvtk==0.23.0
+mamba install csvtk==0.25.0
 ```
 
+This is really important - software versions change all the time, which may change data analysis results. Mamba lets you "pin" your software to a specific version to help control this!
+
+:::info
 Unfortunately there's no good way to know if a new version of a
 software package is "significant" or not, unless they use [semantic
 versioning](https://semver.org/)... Generally if there's a big number
@@ -326,13 +341,13 @@ there's no guarantee on that.
 
 For example, our software sourmash 1.0 was very different from 2.0,
 while sourmash 3.0 was virtually identical to 2.0 in usage (but not in
-implementation). The next version, sourmash 4.0, broke things.
+implementation). The next version, sourmash 4.0, changed many things.
 
-(The lesson is, don't trust software projects to be consistent in
-their versioning!)
+(The lesson is, it is hard for software projects to communicate changes in any systematic way!)
+:::
 
 ::::warning
-**CHALLENGE:** Use the `mamba create` command to create a new environment
+**CHALLENGE:** Use the `mamba create` command to create a new environment (named `smash`)
 and install the latest version of sourmash in it. Then activate that
 environment and verify that you can run 'sourmash'.
 ::::spoiler
@@ -357,11 +372,11 @@ And/or send collaborators or colleagues the set of software they need,
 all in one nice file?
 
 conda has a nice human-readable format for that, called an
-**'environment file'**. These are supposed to be reasonably portable
-files that you can ship around to different computers and have them
+**'environment file'**. These are portable
+files that you can put on different computers and have them
 automatically install the right stuff. You can see the one for the
-binder for the remote computing workshops
-[here](https://github.com/ngs-docs/2021-remote-computing-binder/blob/latest/binder/environment.yml), and the one for the RNAseq pipeline [here](https://github.com/ngs-docs/2020-ggg-201b-rnaseq/blob/latest/binder/environment.yml),
+binder for a remote computing workshops
+[here](https://github.com/ngs-docs/2021-remote-computing-binder/blob/latest/binder/environment.yml), and the one for an RNAseq pipeline [here](https://github.com/ngs-docs/2020-ggg-201b-rnaseq/blob/latest/binder/environment.yml),
 for example.
 
 (These are [YAML files](https://en.wikipedia.org/wiki/YAML), which are
@@ -402,7 +417,18 @@ installed in each one.
 
 The default is `base`. Other environments will have their own set of
 packages. Environments do not include packages from other environments;
-you'll need to install each package in every environment that needs it.
+you'll need to install each package in every environment that needs it. 
+
+So, for example:
+```
+mamba activate base
+csvtk
+```
+should return "command not found".
+
+:::info
+This may be annoying at first but it helps prevent confusion - you have to be explicit about what you want in each environment!
+:::
 
 You can list environments with `mamba env list`:
 
@@ -414,8 +440,11 @@ It will list all of the available environments as well as denote the environment
 
 Switch environments with `conda activate <environment_name>`, and remove environments with `mamba env remove -n <environment_name>`.
 
-Note that switching environments *doesn't switch your directory*, it just switches *the software you're running.*. Whoa...
+Note that switching environments **doesn't switch your working directory**, it just switches **the software you're running**.
 
+So, for example, you can have one working directory in which you use two different collections of software just fine; you would just have to switch mamba environments. This is really useful for workflows!
+
+:::warning
 ### Tech interlude: what is conda doing?
 
 What conda does when it switches environments is change the location
@@ -430,6 +459,7 @@ environments!
 (You can also use `type <program>` or `which <program>` to see where a
 program is located, and which program you are running when you type
 `<program>`.
+:::
 
 ### Challenges with using one big environment
 
@@ -477,8 +507,7 @@ focused on biology/bioinformatics tools specifically.
 
 You can install stuff directly from these channels by specifying the
 bioconda channel explicitly: `mamba install -c bioconda ...`. Or, you
-can add it to your "default" set of channels to search, as we did
-above:
+can add it to your "default" set of channels to search, as it is in your account (because we installed mamba for you using [mambaforge](https://github.com/conda-forge/miniforge#mambaforge)).
 
 (You don't need to run these, but you can:)
 ```
@@ -487,11 +516,11 @@ mamba config --add channels bioconda
 mamba config --add channels conda-forge
 ```
 
-this sets up your .condarc file -- take a look,
+These commands configure things in your .condarc file -- take a look,
 ```
 cat ~/.condarc
 ```
-This will automatically make conda install search for packages in bioconda.
+This will automatically make `mamba install` search for packages in bioconda and conda-forge.
 
 Note: if you get the error
 
@@ -504,7 +533,7 @@ your channels properly :)
 
 ### Mac OS X and Linux, but not Windows
 
-Note conda itself works on Windows, OS X and Linux!
+conda and mamba work on Windows, OS X and Linux!
 
 But unfortunately many conda-forge and bioconda packages are only
 available for OS X and Linux, and not Windows :(. This is because
@@ -551,8 +580,6 @@ for rmarkdown, but it turns out that google is often your best bet :).
 Google 'install rmarkdown with conda' and you'll see that the first hit is
 `r-rmarkdown`. Let's try it!
 
-Side note: we're going to switch to using the mamba command, because
-it's faster. More on that below.
 ```
 mamba create -n rmd -y r-rmarkdown
 ```
@@ -565,11 +592,15 @@ Activate the environment:
 conda activate rmd
 ```
 
-Now, try `type R` to see where R is installed - under your own account. Yay!
+Now, try running:
+```
+type R
+```
+to see where R is installed - under your own account. Yay!
 If you want, you can run `R` and then `library(rmarkdown)` to verify that
 it's installed.
 
-You can also install your own R packages with `install.packages` - and, as long as you're running R from within your conda environment, it will install into that version of R.
+You can also install your own R packages from within R using `install.packages` - and, as long as you're running R from within your conda environment, it will install into that version of R.
 
 You can manage R packages either way - with conda, or "manually" using R's internal mechanisms. It's often faster to use conda, especially if there are C extension packages, and  I've found that the majority of R packages I use in bioinformatics are readily
 available via conda-forge, which is nice. Again, your mileage may vary... regardless, at least now you have options!
@@ -610,16 +641,14 @@ pip install screed
 to install the screed library in your very own Python environment.
 (screed is another library my lab built for reading sequence data files;
 here we're just using it as an example of something that you can install
-with conda :).
+with mamba).
 
 ### Supporting interactive packages (RStudio and JupyterLab)
 
 Many (most?) people now use R and Python packages via RStudio and
 JupyterLab, and it's totally possible to use conda installs with that.
 
-Unfortunately, showing you how to run RStudio Server and JupyterLab on
-farm is a bit out of scope for this workshop series, but please drop
-us a note at datalab-training@ucdavis.edu if you're interested.
+We'll cover this elsewhere (not today), but hit me up if you're interested in instructions!
 
 ## Tricky things to think about with conda
 
@@ -676,14 +705,14 @@ See [the conda docs](https://docs.conda.io/projects/conda/en/latest/user-guide/t
 
 ## In summary
 
-Conda is one way you can install software on computers, including most
+Mamba and conda is one way you can install software on computers, including most
 especially HPC and cloud computers.
 
-Conda lets you create separate "environments" containing collections of
+Mamba lets you create separate "environments" containing collections of
 software that are isolated from other collections.
 
-Conda supports a pretty normal data science set of tools, and also
+Mamba supports a pretty normal data science set of tools, and also
 provides tools to support computational reproducibility via environment
 files and version pinning.
 
-Go conda!!
+Go mamba!!
