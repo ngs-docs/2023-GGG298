@@ -3,6 +3,7 @@ tags: ggg298, ggg2023, ggg
 ---
 # Automating your analyses with the snakemake workflow system - GGG 298 winter 2023, week 5
 
+[![hackmd-github-sync-badge](https://hackmd.io/kkosFQV5RhiMAzKNFxA2Mw/badge)](https://hackmd.io/kkosFQV5RhiMAzKNFxA2Mw)
 
 ([Permanent link](https://github.com/ngs-docs/2023-GGG298/blob/main/lab-5-snakemake/index.md))
 
@@ -30,7 +31,7 @@ Workflows are ubiquitous!
 
 Making pizza is a workflow!
 
-![pizza as a workflow](https://raw.githubusercontent.com/ngs-docs/2022-GGG298/main/lab-5-snakemake/snakemake-pizza.png)
+![pizza as a workflow](https://raw.githubusercontent.com/ngs-docs/2023-GGG298/main/lab-5-snakemake/snakemake-pizza.png)
 
 Many things in bioinformatics are workflows. 
  
@@ -109,11 +110,11 @@ These are two packages that we will use for bioinformatics work.
 ## More setup
 
 ### Create a working directory
-Create a working directory called `GGG98_lab4` and change into it. All of our work today will be confined to this directory (except the conda environment creation)
+Create a working directory called `GGG98_lab5` and change into it. All of our work today will be confined to this directory (except the conda environment creation)
 
 ```
-mkdir -p ~/GGG298_lab4
-cd ~/GGG298_lab4
+mkdir -p ~/GGG298_lab5
+cd ~/GGG298_lab5
 ```
 
 ### Download some data
@@ -132,7 +133,7 @@ Now we're all set to start running things!
 
 ## RNA-Seq workflow we will automate
 
-![](https://raw.githubusercontent.com/ngs-docs/2022-GGG298/main/lab-5-snakemake/snakemake-workflow.png)
+![](https://raw.githubusercontent.com/ngs-docs/2023-GGG298/main/lab-5-snakemake/snakemake-workflow.png)
 
 ## First step: quality control with FASTQC
 
@@ -163,13 +164,7 @@ Below, we're going to use the `nano` command-line editor. If you already know ho
 (For more information on editing text files on remote computers, see [this lesson](https://ngs-docs.github.io/2021-august-remote-computing/creating-and-modifying-text-files-on-remote-computers.html).)
 ::::
 
-Create a new file and call it "Snakefile"
-
-```
-nano -ET4 Snakefile
-```
-
-Copy and paste this text into the Snakefile:
+Create a new file and call it "Snakefile". Then, copy and paste this text into the Snakefile:
 
 ```
 rule all:
@@ -188,7 +183,7 @@ rule make_fastqc:
 
 ```
 
-Save and close by typing 'CTRL-X', y, ENTER.
+Remember to save!
 
 To run the snakefile, type:
 ```
@@ -196,7 +191,7 @@ snakemake -p -j 1
 ```
 and a bunch of stuff should run.
 
-If it worked, there is a html file and a zip file! Use `ls` to look at the directory contents --
+If it worked, there is a html file and a zip file! Use `ls` or the browser to look at the directory contents --
 ```
 ls
 ```
@@ -226,7 +221,7 @@ Meta-notes:
 * You can specify a subset of outputs, e.g. just the .html file, and snakemake will run the rule even if it only needs one of the files.
 * It goes all red if it fails! (try breaking one command... :)
 * It's all case sensitive.
-* Tabs and spacing matter! That is why we use the `-ET4` flag for nano to make the editor treat tabs as 4 spaces.
+* Tabs and spacing matter!
 * If you see syntax error messages, always check your tabs first. Replacing tabs with spaces could fix the problem!
 * You can make lists for multiple input or output files by separating filenames with a comma.
 
@@ -267,17 +262,11 @@ Specifying the rule name tells snakemake to run that specific rule:
 snakemake -p -j 1 make_fastqc
 ```
 
-Specifying the output file you want, tells snakemake to run the rule that produces the desired output file:
+Specifying the output file you want tells snakemake to run the rule that produces the desired output file:
 
 ```
 snakemake -p -j 1 ERR458493_fastqc.html
 ```
-
-
-
-
-
-
 
 ## Making the rules more generic
 
@@ -306,8 +295,8 @@ Reminder: you need to add the desired output file to the "all" rule as an input,
 
 ## Wildcards
 You should now have two rules:
-1) make_fastqc and 
-2) make_fastqc2, 
+1) `make_fastqc` 
+2) `make_fastqc2`
 
 They have the same shell command but they have different inputs and outputs: one has "ERR458493.fastq.gz" as an input, and "ERR458493_fastqc.html" and "ERR458493_fastqc.zip" as outputs, while the other has "ERR458501.fastq.gz" as an input, and "ERR458501_fastqc.html" and "ERR458501_fastqc.zip" as outputs. 
 
@@ -325,7 +314,7 @@ ERR458501_fastqc.zip
 ^^^^^^^^^
 ```
 
-We can make use of this commonality by adding a wild card! We will tell snakemake that any time it is asked for a file that ends with `_fastqc.html` or `_fastqc.zip`, it should look for a similarly named file that ends with .fastq.gz. If it finds one, it can run fastqc on that file to produce those outputs.
+We can make use of this commonality by adding something called a wild card! We will tell snakemake that any time it is asked for a file that ends with `_fastqc.html` or `_fastqc.zip`, it should look for a similarly named file that ends with .fastq.gz. If it finds one, it can run fastqc on that file to produce those outputs.
 
 Change the make_fastqc rule:
 
