@@ -66,6 +66,8 @@ We suggest using RStudio to run the below commands as it will give you an editor
 
 :::spoiler **Logging into farm and running RStudio Server**
 
+## Quick start: logging into farm and running RStudio Server
+
 Log into farm with ssh/MobaXterm - [link](https://hackmd.io/n7_pXRiiRQ-YpQBQ93uW9Q?view#1-Logging-into-farm).
 
 Then run:
@@ -168,6 +170,21 @@ curl -L https://osf.io/nmqe6/download -o ERR458501.fastq.gz
 
 Now we're all set to start running things!
 
+:::spoiler **Setting up after restarting/logging back in**
+
+## Setting up again after getting logged out
+
+If you want to "resume" things after running the above steps, e.g. if you got logged out somewhere in there, you will need to do the following:
+
+```
+# go to the right working directory
+cd ~/GGG298_lab5
+
+# activate the right conda environment
+mamba activate
+```
+:::
+
 ## RNA-Seq workflow we will automate
 
 ![](https://raw.githubusercontent.com/ngs-docs/2023-GGG298/main/lab-5-snakemake/snakemake-workflow.png)
@@ -249,6 +266,10 @@ One very important point:
 **Here, the "input:" in the rule `all` has to match the "output" in the rule `make_fastqc` or else Snakefile wouldn't know what to make.**
 ::::
 
+Here's the workflow!
+
+![diagram of the workflow snakefile DAG](https://github.com/ngs-docs/2023-GGG298/blob/main/lab-5-snakemake/first-workflow.png?raw=true)
+
 Meta-notes:
 
 * Snakefile contains a snakemake workflow definition
@@ -270,6 +291,18 @@ CTB TODO in class:
 - [ ] show what happens when command is incorrect
 - [ ] show syntax error/space issue
 ::::
+
+:::spoiler **Generating your own visualization with snakemake**
+## Visualizing the workflow
+
+You'll need graphviz:
+```
+mamba install -y graphviz
+```
+and then run:
+```
+snakemake --dag | dot -Tpng > first-workflow.png
+```
 
 ## Some features of workflows
 
@@ -605,9 +638,13 @@ rule salmon_quant:
 
 ## Titus' version of the final snakefile as created during the class
 
+![diagram of final snakefile DAG](https://github.com/ngs-docs/2023-GGG298/blob/main/lab-5-snakemake/end-workflow.png?raw=true)
+
 ```
+import sys
+
 SAMPLES=["ERR458493", "ERR458501", "ERR458494", "ERR458500"]
-print('samples are:', SAMPLES)
+print('samples are:', SAMPLES, file=sys.stderr)
 rule all:
     input:
         expand("{sample}_fastqc.html", sample=SAMPLES),
