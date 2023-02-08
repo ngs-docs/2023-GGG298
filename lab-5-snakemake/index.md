@@ -61,9 +61,35 @@ The name 'snakemake' comes from the fact that it's written in (and can be extend
 
 ## Getting started - logging into farm!
 
-Log into farm.cse.ucdavis.edu using your datalab-XX account.
 
-When you log in, your prompt should look like this:
+We suggest using RStudio to run the below commands as it will give you an editor and a terminal. **Follow [these instructions]((https://hackmd.io/n7_pXRiiRQ-YpQBQ93uW9Q?view#2-Start-and-connect-to-an-RStudio-Server-on-farm))** or see the spoiler below for a quickstart.
+
+:::spoiler **Logging into farm and running RStudio Server**
+
+Log into farm with ssh/MobaXterm - [link](https://hackmd.io/n7_pXRiiRQ-YpQBQ93uW9Q?view#1-Logging-into-farm).
+
+Then run:
+```
+srun -p high2 --time=3:00:00 --nodes=1 \
+    --cpus-per-task 1 --mem 5GB --pty /bin/bash
+```
+and wait for a new prompt. Then run:
+```
+module load spack/R/4.1.1
+module load rstudio-server/2022.07.1
+rserver-farm
+```
+
+Then, 
+* in a new shell, run the ssh tunneling command output by `rserver-farm` above;
+* connect to the `localhost` URL output by `rserver-farm`;
+* Login with your username and the one-time password output by `rserver-farm`;
+* start a Terminal.
+:::
+
+## Moving forward!
+
+When you are all set, your prompt should look like this:
 
 
 >~~~
@@ -74,9 +100,9 @@ If it doesn’t, please alert me!
 
 ## Installing snakemake
 
-We will use conda to install snakemake-minimal. (You should have conda pre-installed.)
+We will use mamba to install snakemake-minimal. (You should have mamba pre-installed.)
 
-We will install snakemake inside a conda environment called "snakemake"
+We will install snakemake inside a mamba environment called "snakemake"
 
 ```
 mamba create -y --name snakemake snakemake-minimal
@@ -88,7 +114,7 @@ This command makes a new environment called "snakemake" and installs snakemake i
 Activate the environment with this command:
 
 ```
-conda activate snakemake
+mamba activate snakemake
 ```
 
 Check the version of snakemake with
@@ -96,7 +122,7 @@ Check the version of snakemake with
 snakemake --version
 ```
 
-As of January 20, 2022, the snakemake version is 6.13.1; yours should be that
+As of Feb 8, 2023, the snakemake version is 7.21.0; yours should be that
 version (or possibly a later one).
 
 Next, add two bioinformatics software packages to the snakemake environment: `fastqc` and `salmon`
@@ -110,24 +136,35 @@ These are two packages that we will use for bioinformatics work.
 ## More setup
 
 ### Create a working directory
-Create a working directory called `GGG98_lab5` and change into it. All of our work today will be confined to this directory (except the conda environment creation)
+Create a working directory called `GGG98_lab5` and change into it. All of our work today will be confined to this directory (except the mamba environment creation)
 
 ```
 mkdir -p ~/GGG298_lab5
 cd ~/GGG298_lab5
 ```
 
-### Download some data
+### Grab some data
 
+On farm, I have a copy of the data for today already downloaded - you can copy it from my directory with:
+```
+cp /home/ctbrown/data/ggg-rnaseq/* .
+```
+
+
+You should now have four files in your current directory, representing
+four RNAseq sequencing experiments.
+
+
+:::spoiler **Download the data from the Web instead.**
+You can download the data "fresh" from the Web like so:
 ```
 curl -L https://osf.io/5daup/download -o ERR458493.fastq.gz
 curl -L https://osf.io/8rvh5/download -o ERR458494.fastq.gz
 curl -L https://osf.io/xju4a/download -o ERR458500.fastq.gz
 curl -L https://osf.io/nmqe6/download -o ERR458501.fastq.gz
 ```
-
-You should now have four files in your current directory, representing
-four sequencing experiments.
+:::
+<p>
 
 Now we're all set to start running things!
 
@@ -156,17 +193,17 @@ rm ERR458493_fastqc.html
 
 ### Create a Snakefile
 
-::::warning
-Unfortunately, on farm we do not have easy access to a Web-based editor like we did on the binder, where we could use RStudio. So instead we need to use a command-line editor.
+:::warning
+We're going to be creating new files on farm for this and future labs. The easiest way to do that (in my opinion ;) is to use RStudio Server which combines an editor with a terminal window. You can also use `nano -ET4` to run an editor directly in the terminal window.
 
-Below, we're going to use the `nano` command-line editor. If you already know how to use a different program, then you can totally use that; just make sure you've set TAB to insert 4 spaces, and not an actual TAB character.
-
-(For more information on editing text files on remote computers, see [this lesson](https://ngs-docs.github.io/2021-august-remote-computing/creating-and-modifying-text-files-on-remote-computers.html).)
+See [this lesson](https://ngs-docs.github.io/2021-august-remote-computing/creating-and-modifying-text-files-on-remote-computers.html) for more details on editing text files on remote computers.
 ::::
 
-Create a new file and call it "Snakefile". Then, copy and paste this text into the Snakefile:
+Create a new file and call it "Snakefile" - in RStudio Server use "New File... Text file", then "Save". After "Save", select the GGG298_lab5 folder and name it Snakefile.
 
-```
+Then, copy and paste this text into the Snakefile, and save it:
+
+```python
 rule all:
     input:
         "ERR458493_fastqc.html",
@@ -180,7 +217,6 @@ rule make_fastqc:
         "ERR458493_fastqc.zip"  
     shell:
         "fastqc ERR458493.fastq.gz"
-
 ```
 
 Remember to save!
@@ -190,6 +226,10 @@ To run the snakefile, type:
 snakemake -p -j 1
 ```
 and a bunch of stuff should run.
+
+:::warning
+What's running?? Let's look at the output together.
+:::
 
 If it worked, there is a html file and a zip file! Use `ls` or the browser to look at the directory contents --
 ```
@@ -226,8 +266,8 @@ Meta-notes:
 * You can make lists for multiple input or output files by separating filenames with a comma.
 
 ::::warning
-CTB TODO:
-- [ ] show breaking command
+CTB TODO in class:
+- [ ] show what happens when command is incorrect
 - [ ] show syntax error/space issue
 ::::
 
@@ -621,7 +661,7 @@ If you specify a conda environment file, in a `conda:` block in a rule, and run 
 
 This is useful when you want to version-pin software a specific action, and/or have conflicting software in different rules.
 
-See [Making and using environment files](https://github.com/ngs-docs/2022-GGG298/blob/main/lab-3-conda/index.md#making-and-using-environment-files) from the conda lesson for more information on conda environment files!
+See [Making and using environment files](https://github.com/ngs-docs/2023-GGG298/blob/main/lab-4-conda/index.md#making-and-using-environment-files) from the conda lesson for more information on conda environment files!
 
 
 ### parallelizing snakemake: -j
@@ -658,15 +698,20 @@ Alternatively, if you have a complex workflow that would take a lot of time and 
 - The basic idea is simple, but there are lots of tricks that we will teach you!
 
 ## More Snakemake resources
-Google is your friend!
 
-[CFDE Snakemake lesson](https://training.nih-cfde.org/en/latest/General-Tools/Snakemake/)
+I've written a number of snakemake resources:
 
-The [first three 201(b) class materials](https://hackmd.io/wnAlw5Y6QRu4kfWiri9Cwg?view) are a fairly gentle introduction
+[snakemake for doing bioinformatics - a beginner's guide (part 1)](http://ivory.idyll.org/blog/2023-snakemake-slithering-section-1.html)
 
-a free book! -- [the Snakemake book](https://endrebak.gitbooks.io/the-snakemake-book/chapters/hello_world/hello_world.html)
+[snakemake for doing bioinformatics - a beginner's guide (part 2)](http://ivory.idyll.org/blog/2023-snakemake-slithering-section-2.html)
 
-ANGUS 2019 material -- [Workflow Management using Snakemake](https://angus.readthedocs.io/en/2019/snakemake_for_automation.html)
+There are some videos here: [CFDE Snakemake lesson](https://training.nih-cfde.org/en/latest/General-Tools/Snakemake/)
+
+I've got a very early stage draft [snakemake book, **here**](https://farm.cse.ucdavis.edu/~ctbrown/2023-snakemake-book-draft/), based on the above materials.
+
+Some advanced materials I've written:
+* [A brief overview of automation and parallelization options in UNIX/on an HPC](http://ivory.idyll.org/blog/2023-automation-and-parallelization.html)
+* [Using snakemake to do simple wildcard operations on many, many, many files](http://ivory.idyll.org/blog/2021-snakemake-simple-operations.html)
 
 ### Dealing with complexity
 
