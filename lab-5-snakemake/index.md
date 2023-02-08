@@ -181,7 +181,7 @@ If you want to "resume" things after running the above steps, e.g. if you got lo
 cd ~/GGG298_lab5
 
 # activate the right conda environment
-mamba activate
+mamba activate snakemake
 ```
 :::
 
@@ -303,6 +303,7 @@ and then run:
 ```
 snakemake --dag | dot -Tpng > first-workflow.png
 ```
+:::
 
 ## Some features of workflows
 
@@ -497,6 +498,7 @@ rule all:
         "ERR458501_fastqc.html",
         "ERR458501_fastqc.zip",
         "orf_coding.fasta.gz",
+    output:
         directory("yeast_orfs")
 
 rule make_fastqc:
