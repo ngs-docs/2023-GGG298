@@ -1,37 +1,62 @@
 ---
-tags: ggg298, ggg2023, ggg
+tags: ggg298, ggg2023, ggg, groups
 ---
-# Practice Makes Perfect (with shell, conda, and snakemake) - GGG 298 winter 2023, week 6
+# Practice Makes Perfect (with shell, conda, and snakemake) - GGG 298 winter 2023, week 6 - Feb 15, 2023
 
 [toc]
 
-TODO:
-* post about plans
-* set up hackmds
-* push to github?
+[![hackmd-github-sync-badge](https://hackmd.io/BlmjwCH8Rqu_bsPeLqMcIw/badge)](https://hackmd.io/BlmjwCH8Rqu_bsPeLqMcIw)
 
 ([Permanent link](https://github.com/ngs-docs/2023-GGG298/blob/main/lab-6.md))
 
-## organization
+<!--
+TODO:
+* set up hackmds
+* push to github
+-->
 
-online breakout room
+## Organization for today
 
-in person groups - ask people to sit together
-
-quick tutorial on using hackmd
+* 2 or more online breakout rooms
+* multiple in person groups - ask people to sit together
+* quick tutorial on using hackmd
 
 ### Using hackmd
 
-I've set up 6 hackmds with edit privileges for everyone. I'll show you a few tricks to using them; here are some notes!
+I've set up 8 hackmds with edit privileges for you to use. I'll show you a few tricks to using them; here are some notes!
 
 * you can switch between edit and view mode in upper left
-* Use a region in the editor bounded by `~~~` on either side (at beginning of line) to paste code examples
+* Use a region in the editor bounded by `~~~` on either side (at beginning of line) to paste code examples as "verbatim"
 * use `*` at the beginning of a line to start a bullet list
 * use `#` or `##` at the beginning of a line to start a new title
 
-## Instructions
+[Group 1](https://hackmd.io/XN_tLnmqQAC7PiZf2rs2Tg?both)
 
-Do all of the below in your farm account. You should use RStudio unless you prefer to use something else.
+[Group 2](https://hackmd.io/nyy2FHUkRRmDxaypBIzcvA?both)
+
+[Group 3](https://hackmd.io/BqkwOJsHSKyXgi6-HlzoVg?both)
+
+[Group 4](https://hackmd.io/k85aOdPCTnOF7uwOEtvzDA)
+
+[Group 5](https://hackmd.io/HoseC0FfQnC3XiWZorz7iA)
+
+[Group 6](https://hackmd.io/bYwfIHi_TeqlykNz8SxAvg)
+
+[Group 7](https://hackmd.io/HHpAVc87S9KDyvkS3ec_JA)
+
+[Group 8](https://hackmd.io/oxBlr-XkQ-iuyV4bQKBzpg)
+
+[Group 9](https://hackmd.io/T0DVzXjCQLCpONQwUiLk7g)
+
+[Group 10](https://hackmd.io/cVOzfrWAQh6pyKgn3uqXAg)
+
+
+
+## Instructions for today
+
+Divide into groups, and then do all of the below in your farm account. You should use RStudio unless you prefer to use something else.
+
+It would be ideal if everyone in each group was able to stay in sync with the entire group...
 
 ### Account preparations - download data
 
