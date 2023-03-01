@@ -3,6 +3,9 @@ tags: ggg, ggg2022, ggg298
 ---
 # Week 8 - git and GitHub - GGG 298, Mar 1, 2023
 
+[![hackmd-github-sync-badge](https://hackmd.io/BqSBVmTARGqCRpiTzRrB5A/badge)](https://hackmd.io/BqSBVmTARGqCRpiTzRrB5A)
+
+
 [(Permanent link)](https://github.com/ngs-docs/2023-GGG298/tree/main/lab-6.md)
 
 [toc]
