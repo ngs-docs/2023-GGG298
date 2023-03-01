@@ -1,5 +1,5 @@
 ---
-tags: ggg, ggg2022, ggg298
+tags: ggg, ggg2023, ggg298
 ---
 # Week 8 - git and GitHub - GGG 298, Mar 1, 2023
 
@@ -212,9 +212,9 @@ Let's try that again...
 ::::warning
 ### On your own, commit and push changes!
 
-Go to your command line on farm.
+Edit the file in RStudio, and add a new line.
 
-Edit the file with `nano README.md`, and add a new line.
+Go to the command line (in Terminal),
 
 Verify with `git status` and `git diff` that the change is to the right file.
 
@@ -551,7 +551,7 @@ To do this:
 * go to zenodo.org in a new browser tab
 * log in with GitHub
 * go to upper right menu, select 'GitHub'
-* flip the switch next to your 2022-ggg298-week6 repository
+* flip the switch next to your 2023-ggg298-week8 repository
 
 Now, go back to your github.com tab.
 
