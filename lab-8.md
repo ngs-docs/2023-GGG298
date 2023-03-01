@@ -5,7 +5,6 @@ tags: ggg, ggg2023, ggg298
 
 [![hackmd-github-sync-badge](https://hackmd.io/BqSBVmTARGqCRpiTzRrB5A/badge)](https://hackmd.io/BqSBVmTARGqCRpiTzRrB5A)
 
-
 [(Permanent link)](https://github.com/ngs-docs/2023-GGG298/tree/main/lab-6.md)
 
 [toc]
@@ -33,12 +32,13 @@ By default the free accounts allow unlimited private repositories with up to thr
 
 Create a "classic-style" personal access token (PAT) [per GitHub instructions](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token); you'll need to select the 'repo' scope for it, and I suggest using a 90 day expiration period.   _(Don't create a fine-grained token, I haven't figured out how to make them work yet!)_
 
-::::warning
+:::warning
 The PAT is a long string of nonsense characters (usually starting with `ghp_`) that you will use in place of a password, below.
 
 Be sure to save your PAT somewhere where you can find it.
 
 [I have made some screenshots available for this process, and we'll go through it in class, too.](#Appendix---screenshots-of-process-to-generate-a-Personal-Authentication-Token-on-GitHub)
+:::
 
 ### Create a git repository on GitHub
 
@@ -54,7 +54,36 @@ Select the URL and copy it into your paste buffer.
 
 ### Log in!
 
-Now, log in to farm. @@
+Now, log in to farm using the below instructions:
+
+## Log in
+
+:::spoiler **Logging into farm and running RStudio Server**
+
+## Quick start: logging into farm and running RStudio Server
+
+Log into farm with ssh/MobaXterm - [link](https://hackmd.io/n7_pXRiiRQ-YpQBQ93uW9Q?view#1-Logging-into-farm).
+
+Then run:
+```
+srun -p high2 --time=3:00:00 --nodes=1 \
+    --cpus-per-task 4 --mem 10GB --pty /bin/bash
+```
+and wait for a new prompt. Then run:
+```
+module load spack/R/4.1.1
+module load rstudio-server/2022.07.1
+rserver-farm
+```
+
+Then, 
+* in a new shell, run the ssh tunneling command output by `rserver-farm` above;
+* connect to the `localhost` URL output by `rserver-farm`;
+* Login with your username and the one-time password output by `rserver-farm`;
+* start a Terminal.
+:::
+
+### Install snakemake
 
 You'll need to have snakemake installed - run:
 
