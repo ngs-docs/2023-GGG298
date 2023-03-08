@@ -3,6 +3,9 @@ tags: ggg, ggg2023, ggg298
 ---
 # Executing large analyses on HPC clusters with slurm! - GGG 298, Mar 2023 - Week 9
 
+[![hackmd-github-sync-badge](https://hackmd.io/p_d88X7HTFSXLmjB0fvuug/badge)](https://hackmd.io/p_d88X7HTFSXLmjB0fvuug)
+
+
 [(Permanent link)](https://github.com/ngs-docs/2023-GGG298/tree/main/lab-9-slurm/README.md)
 
 This two hour lab will introduce you to the slurm system
