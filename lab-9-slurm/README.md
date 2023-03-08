@@ -16,6 +16,43 @@ you’ve used.
 
 [toc]
 
+## Log in
+
+First, let's log in and run RStudio Server as usual.
+
+:::spoiler **Logging into farm and running RStudio Server**
+
+## Quick start: logging into farm and running RStudio Server
+
+Log into farm with ssh/MobaXterm - [link](https://hackmd.io/n7_pXRiiRQ-YpQBQ93uW9Q?view#1-Logging-into-farm).
+
+Then run:
+```
+srun -p high2 --time=3:00:00 --nodes=1 \
+    --cpus-per-task 4 --mem 10GB --pty /bin/bash
+```
+and wait for a new prompt. Then run:
+```
+module load spack/R/4.1.1
+module load rstudio-server/2022.07.1
+rserver-farm
+```
+
+Then, 
+* in a new shell, run the ssh tunneling command output by `rserver-farm` above;
+* connect to the `localhost` URL output by `rserver-farm`;
+* Login with your username and the one-time password output by `rserver-farm`;
+* start a Terminal.
+:::
+
+## Now, log into the farm head node in your Terminal prompt.
+
+Run:
+```
+ssh farm
+```
+to log back into the head node.
+
 ## What is a cluster?
 
 A cluster can be thought of as a group of computers which work
@@ -157,7 +194,7 @@ will just log you out of your ssh session and you should log back in
 CHALLENGE: on the farm head node, set yourself up for a 5 second session
 using srun. What happens when the five seconds are up?
 ::::spoiler
-There is a minimum resolution.
+There is a minimum resolution; it kills jobs on about the minute mark!
 ::::
 
 Note also that you can log directly into the given node with `ssh <node name>`. However, this should only be used to check on how the job is doing or to retrieve temporary files; be careful to avoid running any big jobs on the node as this may cause you and others problems.
@@ -172,8 +209,6 @@ Batch scripts (also known as job scripts) are scripts that contain
 the slurm workload manager by using `sbatch`. They are (mostly) just
 lists of commands you want to run (i.e., shell scripts), and we can use the same commands
 that we would use at the command line within our `sbatch` scripts. There are a few exceptions, tho.
-
-(For more info on bash scripts, wait 'til lab 8 :')
 
 First, to try out `sbatch` let's create a script called
 `HelloWorld.sh` in the directory slurm-lesson using RStudio Server:
@@ -397,7 +432,7 @@ features:
 #SBATCH --mail-user=<email>@ucdavis.edu
 
 # initialize conda
-. ~/mambaforge/etc/profile.d/conda.sh
+. ~/miniforge3/etc/profile.d/conda.sh
 
 # activate your desired conda environment
 conda activate base
