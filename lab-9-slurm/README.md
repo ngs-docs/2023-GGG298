@@ -138,7 +138,7 @@ You can request more or different resources by using the following flags:
 * `-c <number>` = request a certain number of CPUs
 
 Here, the `-c` flag is the same number you would use for `snakemake
--j` to run many things in parallel; see [the snakemake lesson](https://hackmd.io/DCtAjstXRUeUry-w0JUEqw?view). (We'll show
+-j` to run many things in parallel; see [the snakemake lesson](https://hackmd.io/kkosFQV5RhiMAzKNFxA2Mw?view). (We'll show
 you how to run snakemake inside of slurm below!)
 
 **If your prompt doesn't have `farm` in it** - that is, if you're logged into
@@ -176,12 +176,11 @@ that we would use at the command line within our `sbatch` scripts. There are a f
 (For more info on bash scripts, wait 'til lab 8 :')
 
 First, to try out `sbatch` let's create a script called
-`HelloWorld.sh`.
+`HelloWorld.sh` in the directory slurm-lesson using RStudio Server:
 
 ```
 mkdir -p ~/slurm-lesson
 cd ~/slurm-lesson
-nano HelloWorld.sh
 ```
 
 Then copy and paste the following:
@@ -193,8 +192,7 @@ echo Hello World
 sleep 15
 date
 ```
-
-Then exit nano with <kbd>Ctrl+X</kbd>
+and save.
 
 Try running it:
 
@@ -376,7 +374,7 @@ I almost always prefer `sbatch`. There are a bunch of reasons -
 * the script is a text file, so I can correct it if I get something wrong!
 * the script specifies the resources at the top, so I can edit those easily!
 * I can comment the script so I can understand it later.
-* I can use version control to track changes to my sbatch scripts (see [Lab 6, git and GitHub for change tracking!](https://hackmd.io/kJX0JtN0RtWwaJj8QfvTgw?view))
+* I can use version control to track changes to my sbatch scripts (see [Lab 8, git and GitHub for change tracking!](https://hackmd.io/BqSBVmTARGqCRpiTzRrB5A?view))
 * I can run one (or a dozen) sbatch scripts at various priorities, and can be notified by e-mail when they're done. This lets me walk away from the computer to do other things!!
 
 ### A stock sbatch script that includes activating a conda environment
@@ -447,7 +445,7 @@ There's one key trick here: run `screen` _first_, then run `srun`.
 ### Trick 2: running snakemake inside of an sbatch script.
 
 In our previous workshop, we introduced you to [Automating your
-analyses with the snakemake workflow system](https://hackmd.io/DCtAjstXRUeUry-w0JUEqw?view). You can use snakemake
+analyses with the snakemake workflow system](https://hackmd.io/kkosFQV5RhiMAzKNFxA2Mw?view). You can use snakemake
 inside of an srun or sbatch script!
 
 ::::info
@@ -455,7 +453,7 @@ CHALLENGE: Try using srun to run the following commands:
 
 ```
 conda activate snakemake
-cd ~/GGG298_lab4/
+cd ~/GGG298_lab5/
 rm *.zip *.html
 snakemake -j 1
 ```
@@ -491,7 +489,7 @@ Make a file `snakemake.slurm`, that includes the following lines:
 #SBATCH --mail-user=ctbrown@ucdavis.edu
 
 # initialize conda
-. ~/mambaforge/etc/profile.d/conda.sh
+. ~/miniforge3/etc/profile.d/conda.sh
 
 # activate your desired conda environment
 conda activate snakemake
@@ -610,7 +608,7 @@ scancel -u <username>
 ::::info
 CHALLENGE: Use `srun` to set yourself up with a 10 minute session on high2; then, in the session, use `squeue -u` to find the job ID of your session; then, `scancel` it. 
 
-You can cancel ALL your jobs with `scancel -u <username>`, but be careful :).
+You can cancel ALL your jobs with `scancel -u <username>`, but this will kill your RStudio Server... :).
 ::::
 
 ## More on resources and queues and sharing
