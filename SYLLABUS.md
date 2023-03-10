@@ -85,11 +85,107 @@ Wednesdays, 12:30-3pm.
 
 These will be lab practicals where we take a solid look at a given piece of technology and work through using it together.
 
+### Links to lab notes
+
+1. [Lab 1 - getting started, running workflow once](https://hackmd.io/XtOHW_gbSwS3zSHgshRupA?view)
+2. [Lab 2 - logging into farm; RStudio; and running the workflow again](https://hackmd.io/n7_pXRiiRQ-YpQBQ93uW9Q?view)
+3. [Lab 3 - farm; multiuser systems; UNIX shell](https://hackmd.io/4Tm5i97QT5iDlZL-IC7U8A?view)
+4. [Lab 4 - Installing software on remote computers with conda/mamba](https://hackmd.io/VTcCz9dmSf6vclaHRwavlw?view)
+5. Lab 5 - snakemake for workflows
+6. Lab 6 - hands-on practice time with conda and snakemake!
+7. Lab 7 - Git & GitHub
+8. Lab 8 - Shell scripting, parallelization, file organization, and/or slurm for HPC.
+9. Lab 9 - remote computing? scripting in R? R/RMarkdown? file organization?
+10. Lab 10 - more hands on! Anatomy of a project.
+
 ## Paper discussions
 
 Thursday, 1:10-2pm.
 
 These will be discussion periods where we explore the concepts and questions introduced by various papers, articles, and blog posts. The topics will be relevant to data science and the practice of science.
+
+### Week 2 - data science and workflows
+
+Please read Principles of Data Analysis, Stoudt et al., 2021
+
+Question for first reading: what role does hypothesis testing play in data analysis projects, according to Stoudt et al? And/or what is the proportion of time in a project that is to be spent on hypothesis testing (either your opinion or theirs :)?
+
+Please provide your answer by 11:59pm on Wednesday, Jan 18th.
+
+### Week 3 - reproducibility in science
+
+Our next paper is Trust but Verify: How to Leverage Policies, Workflows, and Infrastructure to Ensure Computational Reproducibility in Publication (https://hdsr.mitpress.mit.edu/pub/f0obb31j/release/3, by Willis and Stodden.
+
+
+Please answer the following question by midnight on Wed, January 25th: **Who decides if a paper is sufficiently reproducible?**
+
+In class on Wednesay we may discuss this question as well: **How do you think "transparency" (as defined in the paper) differs for the experimental and the computational components of biology research? (and what are the implications for reproducibility and/or replicability)?**
+
+### Week 4 - reproducibility in practice
+
+Draft blog post: I found a sizeable bug in our published software. Now what?
+
+https://hackmd.io/@ctb/HJNK-2yk_
+
+Question for third reading: Who should have found this bug, and how would that have worked (e.g. authors, reviewers, journal editors, random Internet people, senior authors’ mothers, etc)? Feel free to refer back to your answer from last week ;).
+
+### Week 5 - reproducibility and correctness in biology
+
+Skim one or both of:
+* [5-HTTLPR: a pointed review](https://slatestarcodex.com/2019/05/07/5-httlpr-a-pointed-review/)
+* [Functionally Enigmatic Genes: A Case Study of the Brain Ignorome](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0088889)
+
+and then answer the following question:
+
+What's a way forward?
+
+Please specify which study/paper you're addressing ;).
+
+### Week 6 - preregistration
+
+please read EITHER [The preregistration revolution](https://www.pnas.org/content/115/11/2600) OR [Prediction, pre-specification, and transparency](https://featuredcontent.psychonomic.org/prediction-pre-specification-and-transparency/), and then answer the following question:
+
+What good practices does preregistration support, what good practices does preregistration prevent, and/or what bad practices does preregistration encourage, drawing from your own personal experience and/or preconceptions?
+
+(Yes, you can read both papers if you like. :)
+
+### Week 7 - chatgpt and AI
+
+Read two or more of the following articles:
+
+* [A publishing infrastructure for AI-assisted academic authoring](https://www.biorxiv.org/content/10.1101/2023.01.21.525030v1), Pividori and Greene;
+* [What would Plato say about ChatGPT?](https://www.nytimes.com/2022/12/15/opinion/chatgpt-education-ai-technology.html), Zeynep Tufekci;
+* [Against automated plagiarism](https://irisvanrooijcogsci.com/2022/12/29/against-automated-plagiarism/), 	
+Iris van Rooij;
+* [The end of organizing](https://every.to/chain-of-thought/the-end-of-organizing)
+
+and then answer the following question:
+
+What, in your opinion, is an ethical use of AI in your scientific work (if any)? Please explore an actual specific use in two or three sentences.
+
+### Week 8 - chatgpt and AI
+
+Skim two or more of the following articles -
+
+* [Human Fallback](https://www.nplusonemag.com/issue-44/essays/human_fallback/) - note, LONG.
+* [AI-powered Bing Chat loses its mind when fed Ars Technica article](https://arstechnica.com/information-technology/2023/02/ai-powered-bing-chat-loses-its-mind-when-fed-ars-technica-article/)
+* [AI Alignment: getting AIs to do what you want is hard, maybe](https://ai-alignment.com/ai-alignment-is-distinct-from-its-near-term-applications-81300500ad2e)
+* [Generative AI: autocomplete for everything](https://noahpinion.substack.com/p/generative-ai-autocomplete-for-everything?ref=weekly-filet)
+* [CNET Is Reviewing the Accuracy of All Its AI-Written Articles After Multiple Major Corrections](https://gizmodo.com/cnet-ai-chatgpt-news-robot-1849996151)
+
+and answer this question: based on these articles and our discussion last week, where do you see AI fitting into your actual scientific workflow? What is responsible use vs irresponsible use?
+
+### Week 9 - the impossibility of AI.
+
+Please read [The Impossibility of Automating Ambiguity](https://direct.mit.edu/artl/article-abstract/27/1/44/101872/The-Impossibility-of-Automating-Ambiguity) by Abeba Birhane, as well as [Hundreds of AI tools have been built to catch covid. None of them helped](https://www.technologyreview.com/2021/07/30/1030329/machine-learning-ai-failed-covid-hospital-diagnosis-pandemic/). Then answer the following question:
+
+How many of the failed attempts to predict COVID were due to the kind of conceptual problem that Dr. Birhane poses, vs more mundane interdisciplinary failures to understand the data, vs simple failures to do good science?
+
+### Week 10 - data feminism: bring back the bodies
+
+Please read [Bring back the bodies](https://mitpressonpubpub.mitpress.mit.edu/pub/zrlj0jqb/release/6) by D'Ignazio and Klein.
+
+What are ways of working equitably with data from human bodies, or biology research on animals or resources indigenous to historically/economically marginized countries, or other bio-centric data? What are some costs and concerns of _not_ considering equity that are relevant to your research interests? You can be as broad or narrow as you want.
 
 ## Questions and Answers
 
