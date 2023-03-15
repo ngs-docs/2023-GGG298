@@ -3,6 +3,9 @@ tags: ggg, ggg2023, ggg298
 ---
 # Running workflows in multiple languages & using data analysis notebooks - GGG 298 - Week 10, part 2!
 
+[![hackmd-github-sync-badge](https://hackmd.io/jLAQicWHSteDyGraulktEg/badge)](https://hackmd.io/jLAQicWHSteDyGraulktEg)
+
+
 Part 1 is [HERE](https://hackmd.io/qlYFV1kPSgClYO0Lvyl7MA?view).
 
 ## Running RStudio Server on farm in a custom conda environment
