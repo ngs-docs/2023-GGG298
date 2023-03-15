@@ -3,6 +3,9 @@ tags: ggg, ggg2023, ggg298
 ---
 # Running workflows in multiple languages & using data analysis notebooks - GGG 298 - Week 10!
 
+[![hackmd-github-sync-badge](https://hackmd.io/qlYFV1kPSgClYO0Lvyl7MA/badge)](https://hackmd.io/qlYFV1kPSgClYO0Lvyl7MA)
+
+
 ## Setting things up on farm
 
 We're using slightly different commands today -
